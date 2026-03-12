@@ -1,0 +1,17 @@
+RewriteEngine ON
+
+# HTTPS Rewrite Rule
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=301,L]
+
+# PHP File - Rule
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+# Subpages - Rewrite Rules
+RewriteRule ^impressum$ /pages/impressum [NC,L]
+RewriteRule ^legal$ /pages/legal [NC,L]
+
+# Error 404 - Rewrite Rule
+ErrorDocument 404 /
